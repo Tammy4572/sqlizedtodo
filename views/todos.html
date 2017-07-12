@@ -12,11 +12,26 @@
             <button type="submit">Add Todo</button>
         </form>
         <ul class="todo-list">
+            <div>
+                {{#errors}}
+                <p>{{msg}}</p>
+                {{/errors}}
+            </div>
+            
                 {{#incomplete}}
+            <div class="wrapper">
                 <form method="POST" action="/{{.}}" id="markCompleteItems">
                     <button type="submit" name="markComplete" class="incomplete">Mark complete</button>
                     <li>{{.}}</li>
                 </form>
+
+                <form id="listItem" method="GET" action="/edit/{{id}}">
+                    <button type="submit">Edit Item</button>
+                </form>
+                <form id="listItem" method="POST" action="/delete/{{id}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
                 {{/incomplete}}
                 {{^incomplete}}
                 <li>You've completed all your tasks!</li>
@@ -26,11 +41,14 @@
         <h2>Completed Tasks</h2>
             <ul class="todo-list">
                 
-                    {{#complete}}
-                        <li class="complete">{{.}}</li>
-                    {{/complete}}
+                    {{#isCompleted}}
+                        <li class="complete">{{name}}</li>
+                    {{/isCompleted}}
                
             </ul>
+        <form id="delete-all" method="POST" action="/todos/deleteall">
+            <button type="submit">Delete All Completed Tasks</button>
+        </form>
       </div>
    </body>
 </html>

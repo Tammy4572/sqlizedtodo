@@ -1,8 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var ToDoModels = sequelize.define('ToDoModels', {
-    completed: DataTypes.BOOL,
-    content: DataTypes.STRING
+  var todolist = sequelize.define('todolist', {
+    name: DataTypes.STRING,
+    isCompleted: DataTypes.BOOLEAN,
+    createdAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
@@ -10,5 +11,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return ToDoModels;
+  return todolist;
 };
